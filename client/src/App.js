@@ -9,6 +9,8 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 
+import { Provider } from 'react-redux';
+
 
 
 import Home from './pages/Home';
@@ -17,9 +19,9 @@ import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Nav from './components/Nav';
-import { StoreProvider } from './utils/GlobalState';
 import OrderHistory from './pages/OrderHistory';
 import Success from './pages/Success';
+import store from './utils/store';
 
 
 const httpLink = createHttpLink({
@@ -46,7 +48,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <StoreProvider >
+          <Provider store={store} >
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
@@ -57,7 +59,7 @@ function App() {
             <Route exact path = '/success' component={Success} />
             <Route component={NoMatch} />
           </Switch>
-          </StoreProvider>
+          </Provider>
         </div>
       </Router>
     </ApolloProvider>
